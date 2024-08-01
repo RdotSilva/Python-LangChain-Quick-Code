@@ -18,4 +18,4 @@ code_chain = LLMChain(llm=llm, prompt=code_prompt)
 
 result = code_chain({"language": "python", "task": "return a list of numbers"})
 
-print(result)
+print(result["text"])
