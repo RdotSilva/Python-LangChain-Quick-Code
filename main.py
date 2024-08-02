@@ -22,6 +22,6 @@ code_prompt = PromptTemplate(
 
 code_chain = LLMChain(llm=llm, prompt=code_prompt)
 
-result = code_chain({"language": "python", "task": "return a list of numbers"})
+result = code_chain({"language": args.language, "task": args.task})
 
 print(result["text"])
