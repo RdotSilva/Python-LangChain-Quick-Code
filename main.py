@@ -20,7 +20,7 @@ code_prompt = PromptTemplate(
     input_variables=["language", "task"],
 )
 
-code_chain = LLMChain(llm=llm, prompt=code_prompt)
+code_chain = LLMChain(llm=llm, prompt=code_prompt, output_key="code")
 
 result = code_chain({"language": args.language, "task": args.task})
 
