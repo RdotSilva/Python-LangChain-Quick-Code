@@ -19,6 +19,10 @@ code_prompt = PromptTemplate(
     template="Write a very short {language} function that will {task}",
     input_variables=["language", "task"],
 )
+test_prompt = PromptTemplate(
+    template="Write test for the following {language} code:\n{code}",
+    input_variables=["language", "code"],
+)
 
 code_chain = LLMChain(llm=llm, prompt=code_prompt, output_key="code")
 
