@@ -1,6 +1,6 @@
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
+from langchain.chains import LLMChain, SequentialChain
 import argparse
 
 from dotenv import load_dotenv
@@ -28,6 +28,12 @@ test_prompt = PromptTemplate(
 code_chain = LLMChain(llm=llm, prompt=code_prompt, output_key="code")
 test_chain = LLMChain(llm=llm, prompt=test_prompt, output_key="test")
 
-result = code_chain({"language": args.language, "task": args.task})
+chain = SequentialChain(
+    chains=[code_chain, test_chain],
+    input_variables=["task", "language"],
+    output_variables=["test", "code"],
+)
 
-print(result["text"])
+result = chain({"language": args.language, "task": args.task})
+
+print(result)
